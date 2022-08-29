@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Graph;
+use App\Models\Relation;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\GraphRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\GraphResource;
-use App\Models\Relation;
 
 class GraphController extends Controller
 {
@@ -72,10 +73,10 @@ class GraphController extends Controller
         return response()->json('Node has been Added to Graph successfully', Response::HTTP_CREATED);
     }
 
-    public function addRelation(Graph $graph)
+    public function addRelation(Request $request, Graph $graph)
     {
-        $parent = $graph->nodes->random()->id;
-        $child = $graph->nodes->random()->id;
+        $parent = $request->parent_id ?? $graph->nodes->random()->id;
+        $child = $request->child_id ?? $graph->nodes->random()->id;
         $graph->relations()->create([
             'parent_id' => $parent,
             'child_id' => $child,

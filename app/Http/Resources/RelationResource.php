@@ -15,7 +15,7 @@ class RelationResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            //'id' => $this->id,
             //'graph' => new GraphResource($this->graph),
             'parent_id' =>  $this->parent_id,
             'child_id' => $this->child_id,
