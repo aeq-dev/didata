@@ -15,6 +15,7 @@ class CreateRelationsTable extends Migration
     {
         Schema::create('relations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('graph_id')->on('graphs');
             $table->foreignId('parent_id')->on('nodes');
             $table->foreignId('child_id')->on('nodes');
         });

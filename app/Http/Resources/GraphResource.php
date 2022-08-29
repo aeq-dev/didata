@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\NodeResource;
+use App\Http\Resources\RelationResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class GraphResource extends JsonResource
@@ -18,6 +20,8 @@ class GraphResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'relations' => RelationResource::collection($this->whenLoaded('relations')),
+            'nodes' => NodeResource::collection($this->whenLoaded('nodes')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

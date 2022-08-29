@@ -19,4 +19,9 @@ class Graph extends Model
     {
         return $this->hasMany(Node::class);
     }
+
+    public function relations(): HasMany
+    {
+        return $this->hasMany(Relation::class);
+    }
 }

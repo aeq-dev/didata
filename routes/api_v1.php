@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-//use App\Http\Controllers\Api\V1\GraphController;
+use App\Http\Controllers\Api\V1\GraphController;
+use App\Http\Controllers\Api\V1\NodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('graphs/{graph}/addNode', [GraphController::class, 'addNode'])->name('graph.addNode');
+Route::post('graphs/{graph}/addRelation', [GraphController::class, 'addRelation'])->name('graph.addRelation');
+//Route::get('/graphs/{graph}/all', [GraphController::class, 'all']);
+Route::apiResource('graphs', GraphController::class);
 
-Route::controller(GraphController::class)->prefix('graph')->group(function () {
-    Route::post('/store', 'store')->name('graph.store');
-});
+Route::delete('nodes/{node}', [NodeController::class, 'destroy'])->name('node.destroy');
