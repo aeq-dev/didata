@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V2;
 
 use App\Models\Graph;
 use App\Models\Relation;
@@ -14,13 +14,13 @@ class GraphController extends Controller
 {
 
     /**
-     * Get all graphs (only meta data).
+     * Get graphs having nodes(only meta data).
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function index()
     {
-        return GraphResource::collection(Graph::all());
+        return GraphResource::collection(Graph::has('nodes')->get());
     }
 
     /**
